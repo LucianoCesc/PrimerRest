@@ -17,24 +17,26 @@ import cl.infoclub.fsj.service.IQuoteService;
 @SpringBootApplication
 public class PrimerRestApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { //Main, donde se ejecuta el proyecto
 		SpringApplication.run(PrimerRestApplication.class, args);
 	}
-	private static final Logger logger =
-			LoggerFactory.getLogger(PrimerRestApplication.class);
-			private ObjectMapper mapper = new ObjectMapper();
-			@Autowired
-			private IQuoteService objQuoteService;
-			@Bean
-			public RestTemplate restTemplate() {
-			return new RestTemplate();
-			}
-			@Bean
-			public CommandLineRunner run() throws Exception {
-			return args -> {
-			Quote quote = objQuoteService.buscar();
-			logger.info(mapper.writeValueAsString(quote));
-			};
-			}
+
+	private static final Logger logger = LoggerFactory.getLogger(PrimerRestApplication.class); //logger de la class PrimerRestApplication
+	private ObjectMapper mapper = new ObjectMapper(); //Mapeo de los objetos
+	@Autowired
+	private IQuoteService objQuoteService; //Llamada e inyeccion de una interfaz para funciones
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate(); //Plantilla de transferencia de estado representativo
+	}
+
+	@Bean
+	public CommandLineRunner run() throws Exception {
+		return args -> {
+			Quote quote = objQuoteService.buscar(); //Uso de la funcion "buscar" de la interfaz inyectada
+			logger.info(mapper.writeValueAsString(quote)); //Escribe valor a String, del objeto quote
+		};
+	}
 
 }

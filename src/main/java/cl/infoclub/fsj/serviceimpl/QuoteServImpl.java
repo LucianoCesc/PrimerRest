@@ -8,20 +8,22 @@ import org.springframework.web.client.RestTemplate;
 import cl.infoclub.fsj.modelo.Quote;
 import cl.infoclub.fsj.service.IQuoteService;
 
+//La linea a continuacion señala que es un servicio (Una implementacion de este)
 @Service
-public class QuoteServImpl implements IQuoteService {
-	@Value("${endpoints.quote}")
-	private String quoteEndpoint;
-	private RestTemplate restTemplate;
+public class QuoteServImpl implements IQuoteService { // Se implementa la Interfaz IQuoteService
+	@Value("${endpoints.quote}") // Valor definido en la application.properties
+	private String quoteEndpoint; // Variable tipo String, con valor de la anotacion "Value"
+	private RestTemplate restTemplate; // Variable de Objeto: RestTemplate
+
 	@Autowired
-	public QuoteServImpl(RestTemplate restTemplate) {
-	this.restTemplate = restTemplate;
+	public QuoteServImpl(RestTemplate restTemplate) { //constructor de la implementacion de servicio
+		this.restTemplate = restTemplate;
 	}
 
 	@Override
 	public Quote buscar() {
-		// TODO Auto-generated method stub
-		return restTemplate.getForObject(quoteEndpoint, Quote.class);
+		
+		return restTemplate.getForObject(quoteEndpoint, Quote.class); // Busca un objeto, pasandole una url "quoteEndpoint", con la clase Quote
 	}
 
 }

@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Value {
+	//Objeto modelo con atributos: id (Integer) y quote (String)
 	private Integer id;
 	private String quote;
 }
